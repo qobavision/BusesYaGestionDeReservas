@@ -1,5 +1,5 @@
 // URL del backend FastAPI (cambiar si usas otro puerto)
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = "https://busesyagestiondereservas.onrender.com";
 
 /** Base + ruta tipo /api/... — evita doble /api si API_URL terminaba mal en /api */
 function urlBackend(rutaAbsoluta) {
