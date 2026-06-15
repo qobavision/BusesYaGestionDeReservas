@@ -62,6 +62,15 @@ CARPETA_COMPROBANTES.mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=str(CARPETA_UPLOADS)), name="uploads")
 
 
+def _rutas_panel_reservas() -> list[str]:
+    """Rutas /reservas/admin vía OpenAPI (FastAPI ya no las expone planas en app.routes)."""
+    return sorted(
+        path
+        for path in app.openapi().get("paths", {})
+        if "/reservas/admin" in path
+    )
+
+
 @app.get("/")
 def inicio():
     return {
@@ -79,13 +88,7 @@ def salud(response: Response):
     o corres otro proceso en el puerto 8000.
     """
     response.headers["Cache-Control"] = "no-store, max-age=0"
-    admin_rutas = sorted(
-        {
-            getattr(r, "path", "")
-            for r in app.routes
-            if "/reservas/admin" in getattr(r, "path", "")
-        }
-    )
+    admin_rutas = _rutas_panel_reservas()
     return {
         "estado": "ok",
         "version_app": VERSION_APP,
@@ -99,11 +102,7 @@ def salud(response: Response):
 def api_alive_calidadpag(response: Response):
     """Nombre único: si esta URL no aparece / responde distinto, el puerto no usa este proyecto."""
     response.headers["Cache-Control"] = "no-store, max-age=0"
-    rutas_panel = [
-        getattr(r, "path", "")
-        for r in app.routes
-        if "/reservas/admin" in getattr(r, "path", "")
-    ]
+    rutas_panel = _rutas_panel_reservas()
     return {
         "proyecto": "CALIDAD_PAG_BACKEND",
         "main_py_en_ejecucion": str(Path(__file__).resolve()),
