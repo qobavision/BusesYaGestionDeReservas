@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - BusesYa</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+
+    <!-- ========================================== -->
+    <!-- LOGIN CONTAINER                            -->
+    <!-- ========================================== -->
+    <main class="login">
+        <div class="login__container">
+            
+            <!-- Lado izquierdo: Imagen/Branding -->
+            <div class="login__branding">
+                <div class="login__overlay"></div>
+                <div class="login__branding-content">
+                    <a href="index.html" class="login__logo">
+                        <span class="login__logo-text">Buses<span class="login__logo-text--bold">Ya</span></span>
+                    </a>
+                    <h2 class="login__branding-title">Bienvenido de vuelta</h2>
+                    <p class="login__branding-text">
+                        Accede a tu panel de administración y gestiona tus reservas de manera eficiente.
+                    </p>
+                    <div class="login__features">
+                        <div class="login__feature">
+                            <i class="fas fa-shield-alt login__feature-icon"></i>
+                            <span class="login__feature-text">Seguridad garantizada</span>
+                        </div>
+                        <div class="login__feature">
+                            <i class="fas fa-clock login__feature-icon"></i>
+                            <span class="login__feature-text">Reservas en tiempo real</span>
+                        </div>
+                        <div class="login__feature">
+                            <i class="fas fa-headset login__feature-icon"></i>
+                            <span class="login__feature-text">Soporte 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lado derecho: Formulario -->
+            <div class="login__form-wrapper">
+                <div class="login__form-container">
+                    
+                    <!-- Header del formulario -->
+                    <div class="login__header">
+                        <h1 class="login__title">Iniciar Sesión</h1>
+                        <p class="login__subtitle">Ingresa tus credenciales para continuar</p>
+                    </div>
+
+                    <!-- Formulario -->
+                    <form class="login__form" id="loginForm" action="#" method="POST">
+                        
+                        <!-- Campo: Email -->
+                        <div class="form-group">
+                            <label for="email" class="form-group__label">
+                                <i class="fas fa-envelope form-group__icon"></i>
+                                Correo Electrónico
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-group__input" 
+                                placeholder="tu@email.com"
+                                required
+                                autocomplete="email"
+                            >
+                            <span class="form-group__error" id="emailError"></span>
+                        </div>
+
+                        <!-- Campo: Contraseña -->
+                        <div class="form-group">
+                            <label for="password" class="form-group__label">
+                                <i class="fas fa-lock form-group__icon"></i>
+                                Contraseña
+                            </label>
+                            <div class="form-group__input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-group__input" 
+                                    placeholder="••••••••"
+                                    required
+                                    autocomplete="current-password"
+                                    minlength="6"
+                                >
+                                <button type="button" class="form-group__toggle" id="togglePassword" aria-label="Mostrar contraseña">
+                                    <i class="fas fa-eye" id="toggleIcon"></i>
+                                </button>
+                            </div>
+                            <span class="form-group__error" id="passwordError"></span>
+                        </div>
+
+                        <!-- Opciones: Recordar / Olvidé -->
+                        <div class="login__options">
+                            <label class="checkbox">
+                                <input type="checkbox" name="remember" class="checkbox__input">
+                                <span class="checkbox__checkmark"></span>
+                                <span class="checkbox__label">Recordarme</span>
+                            </label>
+                            <a href="#" class="login__forgot">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <!-- Botón Submit -->
+                        <button type="submit" class="btn btn--primary btn--full login__submit" id="submitBtn">
+                            <span class="btn__text">Ingresar</span>
+                            <i class="fas fa-arrow-right btn__icon"></i>
+                        </button>
+
+                        <!-- Divider -->
+                        <div class="login__divider">
+                            <span class="login__divider-text">o</span>
+                        </div>
+
+                        <!-- Botón Volver -->
+                        <a href="index.html" class="btn btn--outline btn--full">
+                            <i class="fas fa-home btn__icon"></i>
+                            Volver al inicio
+                        </a>
+
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="login__footer">
+                        <p class="login__footer-text">
+                            ¿No tienes cuenta? 
+                            <a href="#" class="login__footer-link">Contacta al administrador</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS                                    -->
+    <!-- ========================================== -->
+<script src="js/main.js"></script>
+<script src="js/config.js"></script>
+<script src="js/login.js"></script>
+
+</body>
+</html>

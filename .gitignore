@@ -1,0 +1,20 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Variables de entorno
+backend/.env
+
+# Uploads
+backend/uploads/**/*
+
+# Logs
+*.log
+
+# VS Code / Cursor
+.vscode/
+
+# Pytest
+.pytest_cache/

@@ -1,0 +1,318 @@
+// ==========================================
+// PANEL ASESOR DE VENTAS
+// ==========================================
+
+.panel-asesor {
+    .panel__role-badge {
+        padding: 0 $spacing-lg $spacing-md;
+        font-size: 1.1rem;
+        line-height: 1.45;
+        color: rgba($color-white, 0.75);
+        text-transform: none;
+        letter-spacing: 0.02rem;
+        margin-top: -$spacing-sm;
+    }
+
+    .panel__nav-item--highlight {
+        background-color: rgba($color-primary, 0.15);
+        border-left-color: $color-primary;
+    }
+}
+
+.panel-toolbar {
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 0.1rem solid #eee;
+    @include flex(row, space-between, center);
+    flex-wrap: wrap;
+    gap: $spacing-md;
+
+    &__filters {
+        @include flex(row, flex-start, center);
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+    }
+
+    &__label {
+        font-size: 1.3rem;
+        font-weight: $font-weight-semibold;
+        color: $color-gray;
+    }
+
+    &__select,
+    &__input {
+        padding: $spacing-xs $spacing-md;
+        border: 0.15rem solid #e0e0e0;
+        border-radius: $border-radius-md;
+        font-size: 1.3rem;
+        min-width: 14rem;
+    }
+}
+
+// Checkbox compacto: solo viajes sin vehículo/conductor (panel asesor — Viajes)
+.viajes-filtro-sin-flota {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: $font-weight-semibold;
+    color: #475569;
+    user-select: none;
+    flex-shrink: 0;
+
+    &__chk {
+        width: 1.55rem;
+        height: 1.55rem;
+        accent-color: $color-secondary;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+}
+
+// Viajes: vehículo centrado (badge); conductor alineado como origen/destino
+.table--viajes th:nth-child(5),
+.table--viajes td.table-cell--viaje-flota:nth-child(5) {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table--viajes th:nth-child(6),
+.table--viajes td.table-cell--viaje-flota:nth-child(6) {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table--viajes th:nth-child(7),
+.table--viajes td.table-cell--viaje-estado {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modal-panel__content--asignar-viaje {
+    max-width: 68rem;
+}
+
+.modal-panel__content--asignar-viaje .rd-re-form--inline-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+    .modal-panel__content--asignar-viaje .rd-re-form--inline-2 {
+        gap: 1.1rem;
+    }
+}
+
+.modal-panel__content--asignar-viaje #asignarViajeFormError {
+    margin-top: 0.75rem;
+}
+
+.asignar-viaje-resumen__slash {
+    color: #94a3b8;
+    font-weight: 600;
+    padding: 0 0.2em;
+}
+
+.modal-panel__content--asignar-viaje .asignar-viaje-resumen__estado {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.rd-servicio__pax-wrap {
+    margin-top: 0.5rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 0.1rem solid #e2e8f0;
+    border-radius: 0.85rem;
+}
+
+.rd-servicio__pax-wrap .rd-servicio__row {
+    border-bottom: none;
+    padding: 0;
+    align-items: center;
+}
+
+.viajes-acciones-flota {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.estado-pill--flota-asignada,
+.table td .estado-pill.estado-pill--flota-asignada,
+.panel .estado-pill.estado-pill--flota-asignada,
+.modal-panel .estado-pill.estado-pill--flota-asignada {
+    display: inline-flex;
+    align-items: center;
+    color: #0369a1 !important;
+    background: #e0f2fe !important;
+    border: 0.1rem solid #bae6fd !important;
+    font-weight: $font-weight-semibold !important;
+    font-size: 1.2rem;
+    padding: 0.22rem 0.75rem;
+    border-radius: 10rem;
+}
+
+.panel-form-card {
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
+    padding: $spacing-xl;
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $color-secondary;
+        margin-bottom: $spacing-lg;
+        padding-bottom: $spacing-sm;
+        border-bottom: 0.1rem solid #eee;
+    }
+
+    &__subtitle {
+        font-size: 1.3rem;
+        color: $color-gray;
+        margin-bottom: $spacing-lg;
+    }
+
+    .form-group__input,
+    .form-group__select,
+    .form-group__textarea {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border: 0.15rem solid #e0e0e0;
+        border-radius: $border-radius-md;
+        font-size: 1.4rem;
+
+        &:focus {
+            outline: none;
+            border-color: $color-secondary;
+        }
+    }
+
+    .form-group__label {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: $font-weight-semibold;
+        margin-bottom: $spacing-xs;
+        color: $color-dark;
+    }
+
+    .form-group__textarea {
+        min-height: 8rem;
+        resize: vertical;
+    }
+}
+
+.cliente-busqueda {
+    @include flex(row, flex-start, stretch);
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+
+    .form-group__input {
+        flex: 1;
+        min-width: 20rem;
+        padding: $spacing-sm $spacing-md;
+        border: 0.15rem solid #e0e0e0;
+        border-radius: $border-radius-md;
+        font-size: 1.4rem;
+    }
+}
+
+.cliente-detalle {
+    display: none;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+
+    &--visible {
+        display: block;
+    }
+
+    &__header {
+        padding: $spacing-lg;
+        background-color: $color-secondary;
+        color: $color-white;
+        @include flex(row, space-between, center);
+        flex-wrap: wrap;
+        gap: $spacing-md;
+    }
+
+    &__nombre {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+    }
+
+    &__meta {
+        font-size: 1.3rem;
+        opacity: 0.9;
+    }
+
+    &__body {
+        padding: $spacing-lg;
+    }
+
+    &__notas {
+        background-color: $color-gray-light;
+        border-radius: $border-radius-md;
+        padding: $spacing-md;
+        margin-top: $spacing-md;
+        font-size: 1.4rem;
+        color: $color-dark;
+    }
+}
+
+.badge {
+    &--cancelada {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    &--asignada {
+        background-color: #e2e3f3;
+        color: #383d7c;
+    }
+
+    &--pago-pendiente {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    &--pago-verificado {
+        background-color: #d4edda;
+        color: #155724;
+    }
+}
+
+.modal-panel {
+    .form-group__textarea {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border: 0.15rem solid #e0e0e0;
+        border-radius: $border-radius-md;
+        font-size: 1.4rem;
+        font-family: inherit;
+        resize: vertical;
+
+        &:focus {
+            outline: none;
+            border-color: $color-secondary;
+        }
+    }
+}
+
+.asignar-resumen {
+    background-color: $color-gray-light;
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    margin-bottom: $spacing-lg;
+    font-size: 1.4rem;
+    line-height: 1.6;
+
+    strong {
+        color: $color-secondary;
+    }
+}

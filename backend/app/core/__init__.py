@@ -1,0 +1,1 @@
+# Utilidades centrales (JWT, etc.)

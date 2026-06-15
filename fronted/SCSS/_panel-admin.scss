@@ -1,0 +1,444 @@
+// ==========================================
+// PANEL DE ADMINISTRACIÓN
+// ==========================================
+
+.panel {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+
+    // ------------------------------------------
+    // SIDEBAR
+    // ------------------------------------------
+    &__sidebar {
+        width: 26rem;
+        background-color: $color-secondary;
+        color: $color-white;
+        @include flex(column, flex-start, stretch);
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        z-index: $z-header;
+        overflow-y: auto;
+    }
+
+    &__logo {
+        padding: $spacing-lg;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        border-bottom: 0.1rem solid rgba($color-white, 0.1);
+        
+        span {
+            color: $color-primary;
+        }
+    }
+
+    &__nav {
+        flex: 1;
+        padding: $spacing-md 0;
+        @include flex(column, flex-start, stretch);
+    }
+
+    &__nav-item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-md $spacing-lg;
+        color: rgba($color-white, 0.8);
+        font-size: $font-size-sm;
+        cursor: pointer;
+        border-left: 0.3rem solid transparent;
+        transition: all 0.2s ease;
+        text-decoration: none;
+
+        &:hover,
+        &--active {
+            background-color: rgba($color-white, 0.05);
+            color: $color-white;
+            border-left-color: $color-primary;
+        }
+    }
+
+    &__user {
+        padding: $spacing-md $spacing-lg;
+        border-top: 0.1rem solid rgba($color-white, 0.1);
+        font-size: 1.3rem;
+    }
+
+    &__logout {
+        color: $color-primary;
+        cursor: pointer;
+        margin-top: $spacing-sm;
+        display: inline-block;
+        font-weight: $font-weight-semibold;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    // ------------------------------------------
+    // CONTENIDO PRINCIPAL
+    // ------------------------------------------
+    &__main {
+        flex: 1;
+        margin-left: 26rem; // Empuja el contenido a la derecha
+        width: calc(100% - 26rem); // Ocupa el espacio restante
+        background-color: $color-gray-light;
+        min-height: 100vh;
+    }
+
+    &__header {
+        background-color: $color-white;
+        padding: $spacing-md $spacing-xl;
+        @include flex(row, space-between, center);
+        box-shadow: $shadow-sm;
+    }
+
+    &__title {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $color-secondary;
+    }
+
+    &__content {
+        padding: $spacing-xl;
+    }
+}
+
+// ------------------------------------------
+// SECCIONES (TABS)
+// ------------------------------------------
+.section {
+    display: none;
+
+    &--active {
+        display: block;
+    }
+}
+
+// ------------------------------------------
+// TARJETAS DE ESTADÍSTICAS (STATS)
+// ------------------------------------------
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: $spacing-lg;
+    margin-bottom: $spacing-xl;
+}
+
+.stat-card {
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
+
+    &__label {
+        font-size: 1.3rem;
+        color: $color-gray;
+        margin-bottom: $spacing-sm;
+    }
+
+    &__value {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $color-secondary;
+    }
+}
+
+// ------------------------------------------
+// TABLAS
+// ------------------------------------------
+.table-container {
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.table-header {
+    padding: $spacing-lg;
+    @include flex(row, space-between, center);
+    border-bottom: 0.1rem solid #eee;
+
+    h3 {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $color-secondary;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+        padding: $spacing-md $spacing-lg;
+        text-align: left;
+        font-size: 1.4rem;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        font-weight: $font-weight-semibold;
+        color: $color-gray;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+    }
+
+    td {
+        border-bottom: 0.1rem solid #f0f0f0;
+        color: #333;
+    }
+
+    tr:hover td {
+        background-color: #fafbfc;
+    }
+}
+
+// ------------------------------------------
+// BADGES (ESTADOS)
+// ------------------------------------------
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: $font-weight-semibold;
+
+    &--pendiente {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    &--confirmada {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    &--completada {
+        background-color: #cce5ff;
+        color: #004085;
+    }
+}
+
+// ------------------------------------------
+// MODALES DEL PANEL
+// ------------------------------------------
+.modal-panel {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3000;
+    padding: $spacing-md;
+
+    &--active {
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__content {
+        background-color: $color-white;
+        border-radius: $border-radius-lg;
+        width: 100%;
+        max-width: 50rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    &__header {
+        padding: $spacing-lg;
+        border-bottom: 0.1rem solid #eee;
+        @include flex(row, space-between, center);
+
+        h3 {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+            color: $color-secondary;
+        }
+    }
+
+    &__close {
+        font-size: $font-size-2xl;
+        color: $color-gray;
+        cursor: pointer;
+        line-height: 1;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    &__body {
+        padding: $spacing-lg;
+    }
+
+    &__footer {
+        padding: $spacing-md $spacing-lg;
+        border-top: 0.1rem solid #eee;
+        @include flex(row, flex-end, center);
+        gap: $spacing-sm;
+        background-color: $color-gray-light;
+        border-radius: 0 0 $border-radius-lg $border-radius-lg;
+    }
+}
+
+// ------------------------------------------
+// FORMULARIOS DENTRO DEL PANEL
+// ------------------------------------------
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md;
+}
+
+// Separador para formularios
+.form-group--separator {
+    margin-top: $spacing-md;
+}
+
+// ------------------------------------------
+// VARIACIONES DE BOTONES (Para el panel)
+// ------------------------------------------
+.btn {
+    &--sm {
+        padding: $spacing-xs $spacing-md;
+        font-size: 1.2rem;
+    }
+
+    &--light {
+        background-color: #e0e0e0;
+        color: $color-dark;
+        
+        &:hover {
+            background-color: #cccccc;
+        }
+    }
+
+    &--icon {
+        padding: $spacing-xs;
+        background: none;
+        color: $color-gray;
+        border: none;
+        cursor: pointer;
+        font-size: $font-size-base;
+
+        &:hover {
+            color: $color-secondary;
+        }
+    }
+}
+
+// ------------------------------------------
+// SCOPE: Inputs dentro del panel
+// ------------------------------------------
+.modal-panel {
+    .form-group__input,
+    .form-group__select {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border: 0.15rem solid #e0e0e0;
+        border-radius: $border-radius-md;
+        background-color: $color-white;
+        color: $color-dark;
+        font-size: 1.4rem;
+        transition: all 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: $color-secondary;
+            box-shadow: 0 0 0 0.3rem rgba($color-secondary, 0.1);
+        }
+    }
+
+    .form-group__label {
+        display: block;
+        font-size: 1.3rem;
+        font-weight: $font-weight-semibold;
+        color: $color-dark;
+        margin-bottom: $spacing-sm;
+    }
+}
+
+// ------------------------------------------
+// RESPONSIVE (CORREGIDO: Solo afecta celulares)
+// ------------------------------------------
+@media (max-width: $breakpoint-md) {
+    .panel {
+        @include flex(column, flex-start, stretch);
+
+        &__sidebar {
+            width: 100%;
+            position: relative;
+            height: auto;
+        }
+
+        &__main {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ——— Perfil sidebar / cabecera: círculo de iniciales (mismo aspecto en admin, asesor, conductor) ———
+.panel-admin .panel__header-user,
+.panel-asesor .panel__header-user,
+.panel-conductor .panel__header-user {
+    display: flex;
+    align-items: center;
+}
+
+.panel-admin .panel__user-profile,
+.panel-asesor .panel__user-profile,
+.panel-conductor .panel__user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.panel-admin .panel__user-avatar,
+.panel-asesor .panel__user-avatar,
+.panel-conductor .panel__user-avatar {
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+    background: rgba($color-white, 0.15);
+    color: $color-white;
+    font-size: 1.3rem;
+    font-weight: $font-weight-bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.panel-admin .panel__user-name,
+.panel-asesor .panel__user-name,
+.panel-conductor .panel__user-name {
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.06em;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+}
+
+.panel-admin .panel__user-role,
+.panel-asesor .panel__user-role,
+.panel-conductor .panel__user-role {
+    display: block;
+    font-size: 1.1rem;
+    color: rgba($color-white, 0.65);
+    margin-top: 0.2rem;
+}

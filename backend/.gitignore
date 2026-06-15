@@ -1,0 +1,11 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+*.log
+.pytest_cache/
+
+# Archivos subidos (se guardan en uploads/, no en git)
+uploads/**/*
+!uploads/**/.gitkeep

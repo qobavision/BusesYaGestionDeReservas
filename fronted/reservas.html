@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - BusesYa</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header__container">
+
+            <a href="index.html" class="header__logo">
+                <span class="header__logo-text">Buses<span class="header__logo-text--bold">Ya</span></span>
+            </a>
+
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Inicio</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link">Contáctanos</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <a href="./login.html" class="btn btn--login">
+                    <i class="fas fa-user btn__icon"></i>
+                    Login
+                </a>
+                <a href="reservas.html" class="btn btn--primary">Reservar</a>
+            </div>
+
+            <button class="header__menu-toggle" aria-label="Abrir menú">
+                <span class="header__menu-bar"></span>
+                <span class="header__menu-bar"></span>
+                <span class="header__menu-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="reservas-page">
+
+        <section class="reservas-header">
+            <div class="reservas-container">
+                <h1 class="reservas-header__title">Reserva tu Bus</h1>
+                <p class="reservas-header__subtitle">
+                    Completa el formulario y te contactaremos para confirmar tu reserva.
+                </p>
+            </div>
+        </section>
+
+        <div class="reservas-container">
+
+            <form class="reserva-form" id="reservaForm" action="#" method="POST">
+
+                <div class="reserva-form__section">
+                    <h2 class="reserva-form__section-title">Datos del viaje</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partida" class="form-group__label form-group__label--required">Dirección de partida</label>
+                            <input type="text" id="partida" name="direccion_partida" class="form-group__input" placeholder="Ej: Av. Javier Prado 123, Lima" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="llegada" class="form-group__label form-group__label--required">Dirección de llegada</label>
+                            <input type="text" id="llegada" name="direccion_llegada" class="form-group__input" placeholder="Ej: Plaza de Armas, Cusco" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fechaPartida" class="form-group__label form-group__label--required">Fecha y hora de partida</label>
+                            <input type="datetime-local" id="fechaPartida" name="fecha_partida" class="form-group__input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fechaRetorno" class="form-group__label">Fecha y hora de retorno</label>
+                            <input type="datetime-local" id="fechaRetorno" name="fecha_retorno" class="form-group__input">
+                            <p class="form-group__hint">Déjalo vacío si es solo ida.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pasajeros" class="form-group__label form-group__label--required">Número de personas</label>
+                            <input type="number" id="pasajeros" name="numero_personas" class="form-group__input" min="1" max="50" placeholder="Ej: 18" required>
+                            <p class="form-group__hint">Máximo 50 pasajeros por reserva en línea.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-group__label">Vehículo sugerido</label>
+                            <div class="vehiculo-sugerido" id="vehiculoSugeridoBox">
+                                <p class="vehiculo-sugerido__placeholder" id="vehiculoSugeridoPlaceholder">
+                                    Ingresa pasajeros para ver el vehículo.
+                                </p>
+                                <p class="vehiculo-sugerido__texto" id="vehiculoSugeridoTexto" hidden></p>
+                                <p class="vehiculo-sugerido__error" id="vehiculoSugeridoError" hidden></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reserva-form__section">
+                    <h2 class="reserva-form__section-title">Datos del cliente</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre" class="form-group__label form-group__label--required">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre_cliente" class="form-group__input" placeholder="Ej: Juan Pérez García" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dni" class="form-group__label form-group__label--required">DNI</label>
+                            <input type="text" id="dni" name="dni" class="form-group__input" maxlength="8" inputmode="numeric" placeholder="Ej: 12345678" required>
+                            <span class="form-group__error" id="dniError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono" class="form-group__label form-group__label--required">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" class="form-group__input" placeholder="Ej: 999888777" pattern="[0-9]{9}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-group__label form-group__label--required">Correo electrónico</label>
+                            <input type="email" id="email" name="email" class="form-group__input" placeholder="Ej: cliente@email.com" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reserva-form__section">
+                    <h2 class="reserva-form__section-title">Método de pago</h2>
+
+                    <div class="form-group">
+                        <label for="metodoPago" class="form-group__label form-group__label--required">Selecciona tu método de pago</label>
+                        <select id="metodoPago" name="metodo_pago" class="form-group__select" required>
+                            <option value="" disabled selected>Elige una opción</option>
+                            <option value="yape">Yape</option>
+                            <option value="plin">Plin</option>
+                            <option value="bcp">Transferencia BCP</option>
+                            <option value="interbank">Transferencia Interbank</option>
+                        </select>
+                    </div>
+
+                    <div class="payment-section">
+                        <div class="payment-methods">
+
+                            <div class="payment-methods__item" data-method="yape">
+                                <img src="images/pagos/yape.png" alt="Yape" class="payment-methods__img">
+                            </div>
+
+                            <div class="payment-methods__item" data-method="plin">
+                                <img src="images/pagos/plin.png" alt="Plin" class="payment-methods__img">
+                            </div>
+
+                            <div class="payment-methods__item" data-method="bcp">
+                                <img src="images/pagos/bcp.png" alt="Transferencia BCP" class="payment-methods__img">
+                            </div>
+
+                            <div class="payment-methods__item" data-method="interbank">
+                                <img src="images/pagos/interbank.png" alt="Transferencia Interbank" class="payment-methods__img">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reserva-form__section">
+                    <div class="submit-section">
+                        <button type="submit" class="btn btn--primary btn--large">Enviar reserva</button>
+                        <p class="terms-text">Al enviar, aceptas nuestros términos y condiciones de servicio.</p>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="tracking-box">
+                <h2 class="tracking-box__title">¿Ya hiciste una reserva?</h2>
+                <p class="tracking-box__text">
+                    Al enviar el formulario verás tu código de reserva en la pantalla. Por favor, guárdalo.
+                </p>
+                <button class="btn btn--login" id="btnTracking">Consultar mis reservas</button>
+            </div>
+
+        </div>
+    </main>
+
+   <div class="modal" id="trackingModal" style="display: none;">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="modal__title">Mis reservas</h3>
+                <span class="modal__close" id="closeModal">&times;</span>
+            </div>
+
+            <div class="modal__body">
+                <form id="trackingForm">
+                    <div class="form-group">
+                        <label for="trackingDni" class="form-group__label form-group__label--required">DNI</label>
+                        <input type="text" id="trackingDni" name="tracking_dni" class="form-group__input" maxlength="8" inputmode="numeric" placeholder="12345678" required>
+                        <span class="form-group__error" id="trackingDniError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trackingCodigo" class="form-group__label">Código de reserva (opcional)</label>
+                        <input type="text" id="trackingCodigo" name="tracking_codigo" class="form-group__input" placeholder="Ej: RES-2026-0001">
+                        <p class="form-group__hint">Déjalo vacío para ver todas tus reservas con ese DNI.</p>
+                    </div>
+                </form>
+
+                <div id="trackingResultados" class="tracking-resultados" hidden></div>
+                <p id="trackingMensaje" class="tracking-mensaje" hidden></p>
+            </div>
+
+            <div class="modal__footer">
+                <button class="btn btn--login" id="btnCancel">Cancelar</button>
+                <button class="btn btn--primary" id="btnBuscar">Buscar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="exitoModal" style="display: none;">
+        <div class="modal__content modal__content--exito">
+            <div class="modal__header">
+                <h3 class="modal__title">Reserva registrada</h3>
+                <span class="modal__close" id="closeExitoModal">&times;</span>
+            </div>
+
+            <div class="modal__body modal-exito">
+                <div class="modal-exito__icon" aria-hidden="true">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p class="modal-exito__mensaje" id="exitoMensaje">Reserva registrada correctamente.</p>
+                <p class="modal-exito__label">Tu código de reserva</p>
+                <p class="modal-exito__codigo" id="exitoCodigo" aria-live="polite"></p>
+                <p class="modal-exito__hint">Por favor, guárdalo.</p>
+            </div>
+
+            <div class="modal__footer modal__footer--center">
+                <button type="button" class="btn btn--primary" id="btnCerrarExito">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+<script src="js/main.js"></script>
+<script src="js/config.js"></script>
+<script src="js/reservas.js"></script>
+
+</body>
+</html>

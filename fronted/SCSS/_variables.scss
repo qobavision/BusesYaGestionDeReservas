@@ -1,0 +1,61 @@
+// ==========================================
+// VARIABLES
+// ==========================================
+
+// Colores
+$color-primary: #ec4b58;        // Rojo del botón Reservar
+$color-primary-hover: #cc0000; // Rojo hover
+$color-secondary: #1d3557;      // Azul oscuro (Inicio activo)
+$color-dark: #1a1a2e;           // Texto oscuro
+$color-white: #ffffff;
+$color-gray-light: #f8f9fa;
+$color-gray: #6c757d;
+$color-overlay: rgba(29, 53, 87, 0.75); // Overlay azul sobre la imagen
+
+// Tipografía
+$font-primary: 'Poppins', sans-serif;
+$font-size-base: 1.6rem;        // 16px
+$font-size-sm: 1.4rem;          // 14px
+$font-size-lg: 1.8rem;          // 18px
+$font-size-xl: 2.4rem;          // 24px
+$font-size-2xl: 3.2rem;         // 32px
+$font-size-3xl: 4.8rem;         // 48px
+$font-size-4xl: 6.4rem;         // 64px
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Espaciado
+$spacing-xs: 0.8rem;
+$spacing-sm: 1.2rem;
+$spacing-md: 1.6rem;
+$spacing-lg: 2.4rem;
+$spacing-xl: 3.2rem;
+$spacing-2xl: 4.8rem;
+$spacing-3xl: 6.4rem;
+
+// Bordes
+$border-radius-sm: 0.4rem;
+$border-radius-md: 0.8rem;
+$border-radius-lg: 1.2rem;
+$border-radius-full: 50rem;
+
+// Sombras
+$shadow-sm: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+$shadow-md: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Z-index
+$z-header: 1000;
+$z-whatsapp: 999;
+$z-overlay: 1;
+$z-content: 2;

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusesYa - Alquiler de Buses en Todo el Perú</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Font Awesome para iconos (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ========================================== -->
+    <!-- HEADER / NAVEGACIÓN                        -->
+    <!-- ========================================== -->
+    <header class="header">
+        <div class="header__container">
+            <!-- Logo -->
+            <a href="index.html" class="header__logo">
+                <span class="header__logo-text">Buses<span class="header__logo-text--bold">Ya</span></span>
+            </a>
+
+            <!-- Navegación -->
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#" class="nav__link nav__link--active">Inicio</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link">Contáctanos</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Botones de acción -->
+            <div class="header__actions">
+                <a href="./login.html" class="btn btn--login">
+                    <i class="fas fa-user btn__icon"></i>
+                    Login
+                </a>
+                <a href="reservas.html" class="btn btn--primary">Reservar</a>
+            </div>
+
+            <!-- Menú hamburguesa (mobile) -->
+            <button class="header__menu-toggle" aria-label="Abrir menú">
+                <span class="header__menu-bar"></span>
+                <span class="header__menu-bar"></span>
+                <span class="header__menu-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- HERO SECTION                               -->
+    <!-- ========================================== -->
+    <section class="hero">
+        <!-- Overlay oscuro -->
+        <div class="hero__overlay"></div>
+
+        <!-- Imagen de fondo -->
+        <div class="hero__background"></div>
+
+        <!-- Contenido del hero -->
+        <div class="hero__content">
+            <h1 class="hero__title">
+                Alquiler de Buses en Todo el Perú
+            </h1>
+            <p class="hero__description">
+                Viaja con total comodidad y seguridad en nuestros vehículos modernos y bien equipados con servicio de
+                conductor incluido. Reserva ahora en línea y elige entre una variedad de transporte para tu viaje,
+                evento o traslado.
+            </p>
+            <a href="reservas.html" class="btn btn--primary btn--large hero__cta">
+                Reservar
+            </a>
+        </div>
+
+        <!-- Curva inferior SVG -->
+        <div class="hero__curve">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M0 120L1440 120L1440 60C1440 60 1200 120 720 120C240 120 0 60 0 60L0 120Z" fill="#ffffff" />
+            </svg>
+        </div>
+
+        <!-- Botón flotante WhatsApp -->
+        <a href="https://wa.me/" class="whatsapp-btn" target="_blank" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp whatsapp-btn__icon"></i>
+        </a>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS (mínimos, solo si necesarios)      -->
+    <!-- ========================================== -->
+<script src="js/main.js"></script>
+
+</body>
+
+</html>

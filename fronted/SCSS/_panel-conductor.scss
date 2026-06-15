@@ -1,0 +1,498 @@
+// ==========================================
+// PANEL CONDUCTOR
+// ==========================================
+
+.panel-conductor {
+    .panel__role-badge {
+        padding: 0 $spacing-lg $spacing-md;
+        font-size: 1.2rem;
+        color: rgba($color-white, 0.65);
+        text-transform: uppercase;
+        letter-spacing: 0.06rem;
+        margin-top: -$spacing-sm;
+    }
+}
+
+.conductor-viajes-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    width: 100%;
+    align-items: center;
+}
+
+.conductor-viajes-cargando {
+    margin: 0;
+    padding: 2rem 2.4rem;
+    color: $color-gray;
+    font-size: 1.4rem;
+}
+
+.conductor-viajes-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    padding: 1.6rem 2rem 2.4rem;
+    background-color: #f1f5f9;
+    box-sizing: border-box;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 1.6rem 2.4rem 2.4rem;
+
+        > .viaje-card:only-child,
+        > .viaje-card:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    > .panel-empty {
+        grid-column: 1 / -1;
+        margin: 0;
+        background: $color-white;
+        border-radius: $border-radius-lg;
+        box-shadow: 0 0.15rem 0.6rem rgba(15, 23, 42, 0.06);
+    }
+
+    > .conductor-viajes-cargando {
+        grid-column: 1 / -1;
+        margin: 0;
+    }
+}
+
+.table-header--conductor h3 {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+}
+
+.panel-conductor .viajes-filtros__btn {
+    border-radius: 999px;
+    padding: 0.65rem 1.35rem;
+}
+
+.conductor-detalle-inner {
+    padding: $spacing-lg;
+    background-color: $color-white;
+
+    .estado-viaje {
+        margin-top: $spacing-lg;
+    }
+}
+
+.viaje-detalle__recojo {
+    font-size: 1.5rem;
+    font-weight: $font-weight-semibold;
+    color: $color-secondary;
+    margin: 0.5rem 0 0 0;
+    line-height: 1.45;
+}
+
+.viaje-detalle__notas {
+    font-size: 1.4rem;
+    color: $color-gray;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.viaje-detalle__row--notas-label {
+    margin-top: $spacing-md;
+}
+
+.viaje-detalle__tel-link {
+    color: #1565c0;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.estado-viaje__intro {
+    font-size: 1.3rem;
+    color: $color-gray;
+    margin: 0 0 $spacing-md 0;
+    line-height: 1.5;
+}
+
+.estado-viaje__msg {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: $font-weight-semibold;
+
+    &--ok {
+        color: #155724;
+    }
+}
+
+.viajes-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 0.1rem solid #eee;
+
+    &__btn {
+        padding: $spacing-xs $spacing-md;
+        border: 0.15rem solid #e0e0e0;
+        border-radius: $border-radius-md;
+        background: $color-white;
+        font-size: 1.3rem;
+        font-weight: $font-weight-semibold;
+        color: $color-gray;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: $color-secondary;
+            color: $color-secondary;
+        }
+
+        &--active {
+            background-color: $color-secondary;
+            border-color: $color-secondary;
+            color: $color-white;
+        }
+    }
+}
+
+.viaje-card {
+    display: flex;
+    flex-direction: column;
+    background: $color-white;
+    border-radius: 1.35rem;
+    box-shadow: 0 0.2rem 0.85rem rgba(15, 23, 42, 0.07);
+    padding: 1.35rem 1.35rem 1.35rem 1.5rem;
+    border: 0.1rem solid #e8ecf1;
+    border-left: 0.55rem solid #facc15;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    text-align: left;
+    font: inherit;
+    min-width: 0;
+
+    &:hover {
+        box-shadow: 0 0.45rem 1.35rem rgba(15, 23, 42, 0.12);
+        border-color: #dbeafe;
+    }
+
+    &:focus-visible {
+        outline: 0.2rem solid #2563eb;
+        outline-offset: 0.2rem;
+    }
+
+    &--barra-pendiente {
+        border-left-color: #facc15;
+    }
+    &--barra-camino {
+        border-left-color: #fb923c;
+    }
+    &--barra-abordo {
+        border-left-color: #818cf8;
+    }
+    &--barra-destino {
+        border-left-color: #38bdf8;
+    }
+    &--barra-fin {
+        border-left-color: #4ade80;
+    }
+    &--barra-cancel {
+        border-left-color: #94a3b8;
+    }
+
+    &--hoy {
+        box-shadow: 0 0.25rem 1rem rgba(236, 75, 88, 0.18);
+    }
+
+    &__top {
+        @include flex(row, space-between, flex-start);
+        gap: 1rem;
+    }
+
+    &__top-main {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    &__estado {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 0.65rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 0.55rem;
+
+        i {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        &--pendiente {
+            background: #fef9c3;
+            color: #a16207;
+        }
+        &--camino {
+            background: #ffedd5;
+            color: #c2410c;
+        }
+        &--abordo {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+        &--destino {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        &--fin {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        &--cancel {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+    }
+
+    &__codigo {
+        font-weight: 800;
+        color: #0f172a;
+        font-size: 1.75rem;
+        letter-spacing: 0.02em;
+        line-height: 1.15;
+        margin-bottom: 0.65rem;
+    }
+
+    &__ruta-line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem 0.5rem;
+        font-size: 1.2rem;
+        line-height: 1.45;
+        color: #1e293b;
+    }
+
+    &__ruta-ch {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+
+        &--orig {
+            color: #1d4ed8;
+        }
+        &--dest {
+            color: #16a34a;
+        }
+    }
+
+    &__ruta-txt {
+        min-width: 0;
+        word-break: break-word;
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    &__ruta-arrow {
+        color: #94a3b8;
+        font-weight: 600;
+        flex-shrink: 0;
+        padding: 0 0.15rem;
+    }
+
+    &__chev {
+        flex-shrink: 0;
+        color: #cbd5e1;
+        font-size: 1.15rem;
+        margin-top: 0.35rem;
+        transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    &:hover &__chev {
+        color: #2563eb;
+        transform: translateX(0.15rem);
+    }
+
+    &__metrics {
+        margin-top: 1.15rem;
+        padding: 1.1rem 0.85rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem 0.75rem;
+        background: #f8fafc;
+        border: 0.1rem solid #e2e8f0;
+        border-radius: 1rem;
+
+        @media (min-width: 480px) {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem 0.5rem;
+            padding: 1.15rem 1rem;
+        }
+    }
+
+    &__metric {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__metric-ic {
+        font-size: 1.15rem;
+        color: $color-secondary;
+        margin-bottom: 0.1rem;
+    }
+
+    &__metric-lab {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #64748b;
+        line-height: 1.2;
+    }
+
+    &__metric-val {
+        font-size: 1.12rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.35;
+        word-break: break-word;
+    }
+}
+
+.viaje-detalle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-lg;
+
+    @media (max-width: $breakpoint-md) {
+        grid-template-columns: 1fr;
+    }
+
+    &__card {
+        background: $color-white;
+        border-radius: $border-radius-lg;
+        box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
+        padding: $spacing-lg;
+    }
+
+    &__title {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $color-secondary;
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-sm;
+        border-bottom: 0.1rem solid #eee;
+    }
+
+    &__row {
+        margin-bottom: $spacing-sm;
+        font-size: 1.4rem;
+        line-height: 1.5;
+
+        strong {
+            color: $color-secondary;
+            display: inline-block;
+            min-width: 10rem;
+        }
+    }
+
+    &__highlight {
+        background: $color-gray-light;
+        border-radius: $border-radius-md;
+        padding: $spacing-md;
+        margin-top: $spacing-md;
+
+        .viaje-detalle__row strong {
+            min-width: auto;
+        }
+    }
+}
+
+.estado-viaje {
+    background: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
+    padding: $spacing-xl;
+    margin-top: $spacing-lg;
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $color-secondary;
+        margin-bottom: $spacing-lg;
+    }
+
+    &__steps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-lg;
+    }
+
+    &__step {
+        flex: 1;
+        min-width: 12rem;
+        text-align: center;
+        padding: $spacing-md;
+        border-radius: $border-radius-md;
+        background: $color-gray-light;
+        font-size: 1.2rem;
+        font-weight: $font-weight-semibold;
+        color: $color-gray;
+        position: relative;
+
+        &--done {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        &--current {
+            background: $color-secondary;
+            color: $color-white;
+        }
+    }
+
+    &__actions {
+        @include flex(row, flex-start, center);
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+    }
+}
+
+.badge {
+    &--en-camino {
+        background-color: #cce5ff;
+        color: #004085;
+    }
+
+    &--abordo {
+        background-color: #e2e3f3;
+        color: #383d7c;
+    }
+
+    &--destino {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+}
+
+.panel-empty {
+    text-align: center;
+    padding: $spacing-2xl;
+    color: $color-gray;
+    font-size: 1.5rem;
+
+    i {
+        font-size: 4rem;
+        margin-bottom: $spacing-md;
+        opacity: 0.4;
+    }
+}

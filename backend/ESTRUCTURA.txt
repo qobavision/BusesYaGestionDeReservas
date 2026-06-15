@@ -1,0 +1,23 @@
+backend/                          ← carpeta del backend (como backendBusesYA/)
+  .venv/                          ← entorno virtual
+  .env                            ← credenciales (NO subir a GitHub)
+  main.py                         ← punto de entrada: uvicorn main:app --reload
+  uploads/                        ← comprobantes de pago
+  app/
+    __init__.py
+    configuracion.py              ← variables del .env
+    database.py                   ← conexión PostgreSQL
+    models/                       ← tablas (SQLAlchemy)
+      cliente.py  empleado.py  rol.py  usuario.py
+      vehiculo.py  viaje.py  reserva.py  pago.py
+    schemas/                      ← validación (Pydantic)
+      cliente.py  empleado.py  usuario.py  vehiculo.py
+      viaje.py  reserva.py  pago.py
+    routers/                      ← endpoints
+      auth.py  clientes.py  empleados.py  usuarios.py
+      vehiculos.py  viajes.py  reservas.py  pagos.py
+    crud/                         ← operaciones en la BD
+      cliente.py  empleado.py  usuario.py  vehiculo.py
+      viaje.py  reserva.py  pago.py
+    dependencies/
+      auth.py                     ← JWT (próximo paso)

@@ -1,0 +1,9 @@
+Coloca aquí las imágenes de cada método de pago (QR o datos bancarios).
+
+Nombres de archivo (PNG o JPG):
+  yape.png
+  plin.png
+  bcp.png
+  interbank.png
+
+Tamaño recomendado: 400x400 px o similar (cuadrado para QR).

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Conductor - Buses Ya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <div class="panel panel-conductor">
+
+    <aside class="panel__sidebar">
+      <div class="panel__logo">Buses<span>Ya</span></div>
+
+      <nav class="panel__nav">
+        <a href="#" class="panel__nav-item panel__nav-item--active" data-section="mis-viajes">
+          <i class="fas fa-route"></i> Mis viajes
+        </a>
+        <a href="#" class="panel__nav-item" data-section="detalle-viaje">
+          <i class="fas fa-map-marked-alt"></i> Detalle del viaje
+        </a>
+      </nav>
+
+      <div class="panel__user">
+        <div class="panel__user-profile">
+          <span class="panel__user-avatar" id="sidebarUserAvatar" aria-hidden="true">CO</span>
+          <div class="panel__user-meta">
+            <div id="conductorNombreSidebar" class="panel__user-name">Conductor</div>
+            <span class="panel__user-role" id="sidebarUserRole">Conductor</span>
+          </div>
+        </div>
+        <span class="panel__logout" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</span>
+      </div>
+    </aside>
+
+    <main class="panel__main">
+
+      <header class="panel__header">
+        <div class="panel__header-titles">
+          <h2 class="panel__title" id="pageTitle">Mis viajes</h2>
+          <p class="panel__header-subtitle" id="fechaHoy"></p>
+        </div>
+        <div class="panel__header-user">
+          <div class="panel-user-chip">
+            <span class="panel-user-chip__avatar" id="headerUserAvatar" aria-hidden="true">CO</span>
+            <div class="panel-user-chip__meta">
+              <span class="panel-user-chip__name" id="headerUserName">Conductor</span>
+              <span class="panel-user-chip__role" id="headerUserRole">Conductor</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="panel__content">
+
+        <!-- MIS VIAJES -->
+        <section class="section section--active" id="mis-viajes">
+          <div class="stats stats--viajes" role="list">
+            <article class="stat-card stat-card--viajes" role="listitem">
+              <span class="stat-card__icon stat-card__icon--blue" aria-hidden="true"><i class="fas fa-calendar-day"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Hoy</p>
+                <p class="stat-card__value" id="statHoy">0</p>
+                <p class="stat-card__hint">Salidas hoy</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--viajes" role="listitem">
+              <span class="stat-card__icon stat-card__icon--amber" aria-hidden="true"><i class="fas fa-sun"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Mañana</p>
+                <p class="stat-card__value" id="statManana">0</p>
+                <p class="stat-card__hint">Próximas salidas</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--viajes" role="listitem">
+              <span class="stat-card__icon stat-card__icon--teal" aria-hidden="true"><i class="fas fa-calendar-week"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Esta semana</p>
+                <p class="stat-card__value" id="statSemana">0</p>
+                <p class="stat-card__hint">En los próximos 7 días</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--viajes" role="listitem">
+              <span class="stat-card__icon stat-card__icon--green" aria-hidden="true"><i class="fas fa-road"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">En curso</p>
+                <p class="stat-card__value" id="statEnCurso">0</p>
+                <p class="stat-card__hint">Ya en ruta</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="table-container table-container--conductor">
+            <div class="table-header table-header--conductor">
+              <h3>Viajes asignados</h3>
+            </div>
+            <div class="panel-toolbar panel-toolbar--conductor">
+              <div class="conductor-viajes-filtros" id="viajesFiltros" role="group" aria-label="Filtrar por fecha">
+                <button type="button" class="viajes-filtros__btn viajes-filtros__btn--active" data-filtro="hoy">Hoy</button>
+                <button type="button" class="viajes-filtros__btn" data-filtro="manana">Mañana</button>
+                <button type="button" class="viajes-filtros__btn" data-filtro="semana">Esta semana</button>
+                <button type="button" class="viajes-filtros__btn" data-filtro="todos">Todos</button>
+              </div>
+            </div>
+            <div class="conductor-viajes-list" id="listaViajes"></div>
+          </div>
+        </section>
+
+        <!-- DETALLE DEL VIAJE -->
+        <section class="section" id="detalle-viaje">
+          <div id="detalleVacio" class="panel-empty">
+            <i class="fas fa-bus" aria-hidden="true"></i>
+            <p>Selecciona un viaje desde <strong>Mis viajes</strong> para ver el detalle.</p>
+          </div>
+
+          <div id="detalleContenido" class="conductor-detalle-layout" hidden>
+            <div class="table-container table-container--conductor table-container--conductor-detalle conductor-ref-shell">
+              <div class="conductor-detalle-inner conductor-ref-inner">
+                <div class="conductor-ref-hero" role="region" aria-label="Resumen del viaje">
+                  <div class="conductor-ref-hero__bloque conductor-ref-hero__bloque--codigo">
+                    <span class="conductor-ref-hero__eyebrow">Código de viaje</span>
+                    <div class="conductor-ref-hero__codigo-line">
+                      <span class="conductor-ref-hero__codigo" id="detCodigoViajeHero">—</span>
+                    </div>
+                    <p class="conductor-ref-hero__reserva" id="detReservaHeroWrap" hidden>
+                      Reserva: <strong id="detCodigoReservaHero">—</strong>
+                    </p>
+                  </div>
+                  <div class="conductor-ref-hero__bloque conductor-ref-hero__bloque--ruta" aria-label="Ruta">
+                    <div class="conductor-ref-hero__punto">
+                      <span class="conductor-ref-hero__punto-etiq conductor-ref-hero__punto-etiq--recojo">Recojo</span>
+                      <span class="conductor-ref-hero__pin conductor-ref-hero__pin--azul" aria-hidden="true"><i class="fas fa-location-dot"></i></span>
+                      <span class="conductor-ref-hero__punto-main" id="detHeroOrigen">—</span>
+                    </div>
+                    <span class="conductor-ref-hero__flecha" aria-hidden="true">➔</span>
+                    <div class="conductor-ref-hero__punto">
+                      <span class="conductor-ref-hero__punto-etiq conductor-ref-hero__punto-etiq--destino">Destino</span>
+                      <span class="conductor-ref-hero__pin conductor-ref-hero__pin--verde" aria-hidden="true"><i class="fas fa-location-dot"></i></span>
+                      <span class="conductor-ref-hero__punto-main" id="detHeroDestino">—</span>
+                    </div>
+                  </div>
+                  <div class="conductor-ref-hero__bloque conductor-ref-hero__bloque--estado">
+                    <span class="conductor-ref-hero__eyebrow">Estado actual</span>
+                    <div id="detEstadoHero" class="conductor-ref-hero__badge-slot">—</div>
+                  </div>
+                </div>
+
+                <div class="conductor-ref-grid-main">
+                  <section class="conductor-ref-card conductor-ref-card--info" aria-labelledby="conductorViajeTitulo">
+                    <div class="conductor-ref-card__head" id="conductorViajeTitulo">
+                      <i class="fas fa-circle-info" aria-hidden="true"></i>
+                      <h2 class="conductor-ref-card__titulo">Información del viaje</h2>
+                    </div>
+                    <div class="conductor-ref-rows">
+                      <div class="conductor-ref-row">
+                        <i class="fas fa-user conductor-ref-row__ic" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Cliente</span>
+                        <span class="conductor-ref-row__val" id="detClienteNombre">—</span>
+                      </div>
+                      <div class="conductor-ref-row">
+                        <i class="fas fa-phone conductor-ref-row__ic" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Teléfono</span>
+                        <span class="conductor-ref-row__val conductor-ref-row__val--tel">
+                          <a href="#" id="detTelefonoLink" class="conductor-ref-tel"><span id="detTelefono">—</span></a>
+                        </span>
+                      </div>
+                      <div class="conductor-ref-row">
+                        <i class="fas fa-location-dot conductor-ref-row__ic conductor-ref-row__ic--verde" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Punto de recojo</span>
+                        <span class="conductor-ref-row__val" id="detOrigen">—</span>
+                      </div>
+                      <div class="conductor-ref-row">
+                        <i class="fas fa-flag conductor-ref-row__ic conductor-ref-row__ic--rojo" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Destino</span>
+                        <span class="conductor-ref-row__val" id="detDestino">—</span>
+                      </div>
+                      <div class="conductor-ref-row conductor-ref-row--fechas">
+                        <i class="fas fa-clock conductor-ref-row__ic conductor-ref-row__ic--azul" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Salida</span>
+                        <div class="conductor-ref-row__val conductor-ref-row__val--stack">
+                          <p class="conductor-ref-row__line1" id="detSalidaFecha">—</p>
+                          <p class="conductor-ref-row__line2" id="detSalidaHora">—</p>
+                        </div>
+                      </div>
+                      <div class="conductor-ref-row conductor-ref-row--fechas">
+                        <i class="fas fa-rotate-left conductor-ref-row__ic conductor-ref-row__ic--violeta" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Regreso</span>
+                        <div class="conductor-ref-row__val conductor-ref-row__val--stack">
+                          <p class="conductor-ref-row__line1" id="detRegresoFecha">—</p>
+                          <p class="conductor-ref-row__line2" id="detRegresoHora">—</p>
+                        </div>
+                      </div>
+                      <div class="conductor-ref-row">
+                        <i class="fas fa-users conductor-ref-row__ic" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Pasajeros</span>
+                        <span class="conductor-ref-row__val" id="detPasajeros">—</span>
+                      </div>
+                      <div class="conductor-ref-row">
+                        <i class="fas fa-bus conductor-ref-row__ic conductor-ref-row__ic--azul" aria-hidden="true"></i>
+                        <span class="conductor-ref-row__lab">Vehículo asignado</span>
+                        <span class="conductor-ref-row__val conductor-ref-row__val--strong" id="detVehiculo">—</span>
+                      </div>
+                    </div>
+                  </section>
+
+                  <div class="conductor-ref-col-estado">
+                    <aside class="conductor-ref-card conductor-ref-card--estado" aria-label="Marcar estado del viaje">
+                      <div class="conductor-ref-card__head">
+                        <i class="fas fa-arrows-rotate" aria-hidden="true"></i>
+                        <h2 class="conductor-ref-card__titulo">Actualizar estado del viaje</h2>
+                      </div>
+                      <p class="conductor-ref-estado-sub">Se guarda en el sistema (asesor y administración).</p>
+                      <div class="conductor-ref-estado-stack" id="conductorEstadoBtns">
+                        <button type="button" class="conductor-ref-estado-card conductor-estado-btn" data-estado="pendiente">
+                          <span class="conductor-ref-estado-card__icon conductor-ref-estado-card__icon--pendiente" aria-hidden="true"><i class="fas fa-hourglass-half"></i></span>
+                          <span class="conductor-ref-estado-card__body">
+                            <span class="conductor-ref-estado-card__titulo">Pendiente</span>
+                            <span class="conductor-ref-estado-card__desc">El viaje aún no ha iniciado.</span>
+                          </span>
+                        </button>
+                        <button type="button" class="conductor-ref-estado-card conductor-estado-btn" data-estado="en_camino">
+                          <span class="conductor-ref-estado-card__icon conductor-ref-estado-card__icon--camino" aria-hidden="true"><i class="fas fa-route"></i></span>
+                          <span class="conductor-ref-estado-card__body">
+                            <span class="conductor-ref-estado-card__titulo">En camino</span>
+                            <span class="conductor-ref-estado-card__desc">El viaje está en desarrollo.</span>
+                          </span>
+                        </button>
+                        <button type="button" class="conductor-ref-estado-card conductor-estado-btn" data-estado="finalizado">
+                          <span class="conductor-ref-estado-card__icon conductor-ref-estado-card__icon--fin" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                          <span class="conductor-ref-estado-card__body">
+                            <span class="conductor-ref-estado-card__titulo">Finalizado</span>
+                            <span class="conductor-ref-estado-card__desc">El viaje ha sido completado.</span>
+                          </span>
+                        </button>
+                      </div>
+                      <div class="conductor-ref-estado-hint" role="note">
+                        <i class="fas fa-circle-info" aria-hidden="true"></i>
+                        <p>Selecciona el estado actual del viaje según corresponda.</p>
+                      </div>
+                      <p class="conductor-ref-msg" id="conductorEstadoMsg" hidden></p>
+                    </aside>
+                    <div class="conductor-ref-volver-spacer" aria-hidden="true"></div>
+                    <div class="conductor-ref-volver-wrap">
+                      <button type="button" class="conductor-ref-volver-btn" id="btnVolverViajes">
+                        <span class="conductor-ref-volver-btn__ic" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+                        <span class="conductor-ref-volver-btn__txt">Volver a mis viajes</span>
+                        <span class="conductor-ref-volver-btn__sub">Listado de salidas asignadas</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="conductor-ref-bottom-tip" role="note">
+                  <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                  <span>Recuerda mantener informado al asesor sobre cualquier eventualidad durante el viaje.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="modalConfirmarFinalizar" class="conductor-modal" hidden role="dialog" aria-modal="true" aria-labelledby="conductorModalFinalizarTitulo">
+    <div class="conductor-modal__backdrop" data-conductor-modal-close="1"></div>
+    <div class="conductor-modal__box">
+      <h3 id="conductorModalFinalizarTitulo" class="conductor-modal__titulo">Finalizar viaje</h3>
+      <p class="conductor-modal__texto">¿Está seguro de que desea finalizar este viaje?</p>
+      <div class="conductor-modal__acciones">
+        <button type="button" class="btn btn--light" id="conductorModalFinalizarNo">No</button>
+        <button type="button" class="btn btn--primary" id="conductorModalFinalizarSi">Sí</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/panel-conductor.js"></script>
+</body>
+</html>

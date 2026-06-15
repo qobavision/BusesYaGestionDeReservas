@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador - Buses Ya</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <div class="panel panel-admin">
+    
+    <!-- SIDEBAR -->
+    <aside class="panel__sidebar">
+      <div class="panel__logo">Buses<span>Ya</span></div>
+      
+      <nav class="panel__nav">
+        <a href="#" class="panel__nav-item panel__nav-item--active" data-section="dashboard">
+          <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
+        <a href="#" class="panel__nav-item" data-section="reservas">
+          <i class="fas fa-clipboard-list"></i> Reservas
+        </a>
+        <a href="#" class="panel__nav-item" data-section="vehiculos">
+          <i class="fas fa-truck"></i> Vehículos
+        </a>
+        <a href="#" class="panel__nav-item" data-section="empleados">
+          <i class="fas fa-users"></i> Empleados
+        </a>
+        <a href="#" class="panel__nav-item" data-section="usuarios">
+          <i class="fas fa-users-cog"></i> Usuarios del Sistema
+        </a>
+      </nav>
+      
+      <div class="panel__user">
+        <div class="panel__user-profile">
+          <span class="panel__user-avatar" id="sidebarUserAvatar" aria-hidden="true">AD</span>
+          <div class="panel__user-meta">
+            <div id="adminNombre" class="panel__user-name">ADMINISTRADOR</div>
+            <span class="panel__user-role" id="sidebarUserRole">Administrador</span>
+          </div>
+        </div>
+        <span class="panel__logout" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</span>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="panel__main">
+      
+      <header class="panel__header">
+        <h2 class="panel__title" id="pageTitle">Dashboard</h2>
+        <div class="panel__header-user">
+          <div class="panel-user-chip">
+            <span class="panel-user-chip__avatar" id="headerUserAvatar" aria-hidden="true">AD</span>
+            <div class="panel-user-chip__meta">
+              <span class="panel-user-chip__name" id="headerUserName">ADMINISTRADOR</span>
+              <span class="panel-user-chip__role" id="headerUserRole">Administrador</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="panel__content">
+
+        <!-- DASHBOARD -->
+        <section class="section section--active" id="dashboard">
+          <div class="stats stats--dashboard" role="list">
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--blue" aria-hidden="true"><i class="fas fa-calendar-day"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Reservas hoy</p>
+                <p class="stat-card__value" id="statReservasHoy">—</p>
+                <p class="stat-card__hint">Registradas hoy</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--indigo" aria-hidden="true"><i class="fas fa-calendar"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Reservas del mes</p>
+                <p class="stat-card__value" id="statReservasMes">—</p>
+                <p class="stat-card__hint">Por fecha de registro</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--amber" aria-hidden="true"><i class="fas fa-clock"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Reservas pendientes</p>
+                <p class="stat-card__value" id="statPendientes">—</p>
+                <p class="stat-card__hint">Por confirmar</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--green" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Reservas confirmadas</p>
+                <p class="stat-card__value" id="statConfirmadas">—</p>
+                <p class="stat-card__hint">Activas</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--teal" aria-hidden="true"><i class="fas fa-route"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Viajes activos</p>
+                <p class="stat-card__value" id="statViajesActivos">—</p>
+                <p class="stat-card__hint">En operación</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--purple" aria-hidden="true"><i class="fas fa-flag-checkered"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Viajes completados</p>
+                <p class="stat-card__value" id="statViajesCompletados">—</p>
+                <p class="stat-card__hint">Finalizados</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--coral" aria-hidden="true"><i class="fas fa-bus"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Vehículos disponibles</p>
+                <p class="stat-card__value" id="statVehiculosDisponibles">—</p>
+                <p class="stat-card__hint">Listos para viaje</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--dashboard" role="listitem">
+              <span class="stat-card__icon stat-card__icon--gold" aria-hidden="true"><i class="fas fa-coins"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Ingresos del mes</p>
+                <p class="stat-card__value stat-card__value--money" id="statIngresosMes">—</p>
+                <p class="stat-card__hint" id="dashboardMesLabel">Pagos verificados</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="table-container table-container--dashboard">
+            <div class="table-header table-header--dashboard">
+              <h3>Actividad reciente</h3>
+              <p class="table-header__subtitle">Reservas y viajes recientes</p>
+            </div>
+            <table class="table table--dashboard">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Cliente</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
+                  <th>Salida</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tablaUltimasReservas">
+              </tbody>
+            </table>
+            <div class="table-footer" id="dashboardActividadFooter">
+              <p class="table-footer__info" id="dashboardActividadPaginacionInfo">Mostrando 0 actividades</p>
+              <div class="table-footer__pager">
+                <button type="button" class="btn-pager" id="dashboardActividadPaginaPrev" disabled aria-label="Página anterior">
+                  <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <span class="btn-pager btn-pager--current" id="dashboardActividadPaginaLabel" aria-current="page">1</span>
+                <button type="button" class="btn-pager" id="dashboardActividadPaginaNext" disabled aria-label="Página siguiente">
+                  <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESERVAS -->
+        <section class="section" id="reservas">
+          <div class="stats stats--reservas" role="list">
+            <article class="stat-card stat-card--reservas" role="listitem">
+              <span class="stat-card__icon stat-card__icon--blue" aria-hidden="true"><i class="fas fa-clipboard-list"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Total reservas</p>
+                <p class="stat-card__value" id="statResTotal">0</p>
+                <p class="stat-card__hint">En el sistema</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--reservas" role="listitem">
+              <span class="stat-card__icon stat-card__icon--amber" aria-hidden="true"><i class="fas fa-clock"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Pendientes</p>
+                <p class="stat-card__value" id="statResPendientes">0</p>
+                <p class="stat-card__hint">Por confirmar</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--reservas" role="listitem">
+              <span class="stat-card__icon stat-card__icon--green" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Confirmadas</p>
+                <p class="stat-card__value" id="statResConfirmadas">0</p>
+                <p class="stat-card__hint">Activas</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--reservas" role="listitem">
+              <span class="stat-card__icon stat-card__icon--rose" aria-hidden="true"><i class="fas fa-ban"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Canceladas</p>
+                <p class="stat-card__value" id="statResCanceladas">0</p>
+                <p class="stat-card__hint">No vigentes</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="table-container table-container--reservas">
+            <div class="table-header table-header--split table-header--reservas">
+              <span class="table-header__spacer" aria-hidden="true"></span>
+              <button type="button" class="btn btn--primary btn--sm" id="btnNuevaReservaAdmin">
+                <i class="fas fa-plus" aria-hidden="true"></i> Nueva reserva
+              </button>
+            </div>
+            <div class="panel-toolbar panel-toolbar--reservas">
+              <div class="panel-toolbar__filters">
+                <label class="panel-toolbar__label" for="filtroEstadoReserva">Estado:</label>
+                <select id="filtroEstadoReserva" class="panel-toolbar__select">
+                  <option value="">Todos</option>
+                  <option value="pendiente">Pendiente</option>
+                  <option value="confirmada">Confirmada</option>
+                  <option value="cancelada">Cancelada</option>
+                </select>
+                <input type="search" id="buscarReservaAdmin" class="panel-toolbar__input panel-toolbar__input--grow" placeholder="Buscar código, cliente, DNI, teléfono, ruta, monto…" autocomplete="off">
+              </div>
+            </div>
+            <table class="table table--reservas">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Cliente</th>
+                  <th>DNI</th>
+                  <th>Teléfono</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
+                  <th>Pasajeros</th>
+                  <th class="table-th--monto">Monto</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaReservas"></tbody>
+            </table>
+            <div class="table-footer" id="reservasTableFooter">
+              <p class="table-footer__info" id="reservasPaginacionInfo">Mostrando 0 reservas</p>
+              <div class="table-footer__pager">
+                <button type="button" class="btn-pager" id="reservasPaginaPrev" disabled aria-label="Página anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                <span class="btn-pager btn-pager--current" id="reservasPaginaLabel" aria-current="page">1</span>
+                <button type="button" class="btn-pager" id="reservasPaginaNext" disabled aria-label="Página siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VEHÍCULOS -->
+        <section class="section" id="vehiculos">
+          <div class="stats stats--vehiculos" role="list">
+            <article class="stat-card stat-card--vehiculos" role="listitem">
+              <span class="stat-card__icon stat-card__icon--blue" aria-hidden="true"><i class="fas fa-bus"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Total flota</p>
+                <p class="stat-card__value" id="statVehTotal">0</p>
+                <p class="stat-card__hint">Vehículos registrados</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--vehiculos" role="listitem">
+              <span class="stat-card__icon stat-card__icon--green" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Disponibles</p>
+                <p class="stat-card__value" id="statVehDisponibles">0</p>
+                <p class="stat-card__hint">Listos para viaje</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--vehiculos" role="listitem">
+              <span class="stat-card__icon stat-card__icon--amber" aria-hidden="true"><i class="fas fa-calendar-check"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Reservados</p>
+                <p class="stat-card__value" id="statVehReservados">0</p>
+                <p class="stat-card__hint">En uso</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--vehiculos" role="listitem">
+              <span class="stat-card__icon stat-card__icon--rose" aria-hidden="true"><i class="fas fa-screwdriver-wrench"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Mantenimiento</p>
+                <p class="stat-card__value" id="statVehMantenimiento">0</p>
+                <p class="stat-card__hint">Fuera de servicio</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="table-container table-container--vehiculos">
+            <div class="table-header table-header--split table-header--vehiculos">
+              <span class="table-header__spacer" aria-hidden="true"></span>
+              <button type="button" class="btn btn--primary btn--sm" id="btnNuevoVehiculo">
+                <i class="fas fa-plus" aria-hidden="true"></i> Nuevo vehículo
+              </button>
+            </div>
+            <div class="panel-toolbar panel-toolbar--vehiculos">
+              <div class="panel-toolbar__filters">
+                <label class="panel-toolbar__label" for="filtroEstadoVehiculo">Estado:</label>
+                <select id="filtroEstadoVehiculo" class="panel-toolbar__select">
+                  <option value="">Todos</option>
+                  <option value="disponible">Disponible</option>
+                  <option value="reservado">Reservado</option>
+                  <option value="mantenimiento">Mantenimiento</option>
+                </select>
+                <label class="panel-toolbar__label" for="filtroTipoVehiculo">Tipo:</label>
+                <select id="filtroTipoVehiculo" class="panel-toolbar__select">
+                  <option value="">Todos</option>
+                  <option value="Minivan">Minivan</option>
+                  <option value="Van">Van</option>
+                  <option value="Coaster">Coaster</option>
+                  <option value="Omnibus">Ómnibus</option>
+                </select>
+                <input
+                  type="search"
+                  id="buscarVehiculo"
+                  class="panel-toolbar__input panel-toolbar__input--grow"
+                  placeholder="Buscar por placa, marca, modelo, tipo…"
+                  autocomplete="off"
+                >
+              </div>
+            </div>
+            <table class="table table--vehiculos">
+              <thead>
+                <tr>
+                  <th>Placa</th>
+                  <th>Tipo</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Capacidad</th>
+                  <th>Año</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaVehiculos">
+                <!-- FastAPI -->
+              </tbody>
+            </table>
+            <div class="table-footer" id="vehiculosTableFooter">
+              <p class="table-footer__info" id="vehiculosPaginacionInfo">Mostrando 0 vehículos</p>
+              <div class="table-footer__pager">
+                <button type="button" class="btn-pager" id="vehiculosPaginaPrev" disabled aria-label="Página anterior">
+                  <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <span class="btn-pager btn-pager--current" id="vehiculosPaginaLabel" aria-current="page">1</span>
+                <button type="button" class="btn-pager" id="vehiculosPaginaNext" disabled aria-label="Página siguiente">
+                  <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EMPLEADOS -->
+        <section class="section" id="empleados">
+          <div class="stats stats--empleados" role="list">
+            <article class="stat-card stat-card--empleados" role="listitem">
+              <span class="stat-card__icon stat-card__icon--blue" aria-hidden="true"><i class="fas fa-users"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Total empleados</p>
+                <p class="stat-card__value" id="statEmpTotal">0</p>
+                <p class="stat-card__hint">En la empresa</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--empleados" role="listitem">
+              <span class="stat-card__icon stat-card__icon--indigo" aria-hidden="true"><i class="fas fa-user-shield"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Administradores</p>
+                <p class="stat-card__value" id="statEmpAdmin">0</p>
+                <p class="stat-card__hint">Activos</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--empleados" role="listitem">
+              <span class="stat-card__icon stat-card__icon--purple" aria-hidden="true"><i class="fas fa-briefcase"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Asesor de ventas</p>
+                <p class="stat-card__value" id="statEmpAsesor">0</p>
+                <p class="stat-card__hint">Activos</p>
+              </div>
+            </article>
+            <article class="stat-card stat-card--empleados" role="listitem">
+              <span class="stat-card__icon stat-card__icon--green" aria-hidden="true"><i class="fas fa-car-side"></i></span>
+              <div class="stat-card__content">
+                <p class="stat-card__label">Conductores activos</p>
+                <p class="stat-card__value" id="statEmpConductores">0</p>
+                <p class="stat-card__hint">Activos</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="table-container table-container--empleados">
+            <div class="table-header table-header--split table-header--empleados">
+              <span class="table-header__spacer" aria-hidden="true"></span>
+              <button type="button" class="btn btn--primary btn--sm" id="btnNuevoEmpleado">
+                <i class="fas fa-plus" aria-hidden="true"></i> Nuevo empleado
+              </button>
+            </div>
+            <div class="panel-toolbar panel-toolbar--empleados">
+              <div class="panel-toolbar__filters">
+                <label class="panel-toolbar__label" for="filtroCargoEmpleado">Cargo:</label>
+                <select id="filtroCargoEmpleado" class="panel-toolbar__select">
+                  <option value="">Todos</option>
+                  <option value="administrador">Administrador</option>
+                  <option value="asesor_ventas">Asesor de ventas</option>
+                  <option value="conductor">Conductor</option>
+                </select>
+                <input
+                  type="search"
+                  id="buscarEmpleado"
+                  class="panel-toolbar__input panel-toolbar__input--grow"
+                  placeholder="Buscar por DNI, nombre, apellido…"
+                  autocomplete="off"
+                >
+              </div>
+            </div>
+            <table class="table table--empleados">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>DNI</th>
+                  <th>Teléfono</th>
+                  <th>Cargo</th>
+                  <th>Licencia</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaEmpleados">
+                <!-- FastAPI -->
+              </tbody>
+            </table>
+            <div class="table-footer" id="empleadosTableFooter">
+              <p class="table-footer__info" id="empleadosPaginacionInfo">Mostrando 0 empleados</p>
+              <div class="table-footer__pager">
+                <button type="button" class="btn-pager" id="empleadosPaginaPrev" disabled aria-label="Página anterior">
+                  <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <span class="btn-pager btn-pager--current" id="empleadosPaginaLabel" aria-current="page">1</span>
+                <button type="button" class="btn-pager" id="empleadosPaginaNext" disabled aria-label="Página siguiente">
+                  <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- USUARIOS -->
+        <section class="section" id="usuarios">
+          <div class="table-container table-container--usuarios">
+            <div class="table-header table-header--split table-header--usuarios">
+              <span class="table-header__spacer" aria-hidden="true"></span>
+              <button type="button" class="btn btn--primary btn--sm" id="btnNuevoUsuario">
+                <i class="fas fa-plus" aria-hidden="true"></i> Nuevo usuario
+              </button>
+            </div>
+            <div class="panel-toolbar panel-toolbar--usuarios">
+              <div class="panel-toolbar__filters">
+                <label class="panel-toolbar__label" for="filtroRolUsuario">Rol:</label>
+                <select id="filtroRolUsuario" class="panel-toolbar__select">
+                  <option value="">Todos</option>
+                  <option value="admin">Administrador</option>
+                  <option value="asesor">Asesor de ventas</option>
+                  <option value="conductor">Conductor</option>
+                </select>
+                <label class="panel-toolbar__label" for="filtroEstadoUsuario">Estado:</label>
+                <select id="filtroEstadoUsuario" class="panel-toolbar__select">
+                  <option value="">Todos</option>
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                </select>
+                <input type="search" id="buscarUsuarioAdmin" class="panel-toolbar__input panel-toolbar__input--grow" placeholder="Buscar usuario, correo o empleado…" autocomplete="off">
+              </div>
+            </div>
+            <table class="table table--usuarios">
+              <thead>
+                <tr>
+                  <th>Usuario</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
+                  <th>Empleado</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaUsuarios"></tbody>
+            </table>
+            <div class="table-footer" id="usuariosTableFooter">
+              <p class="table-footer__info" id="usuariosPaginacionInfo">Mostrando 0 usuarios</p>
+              <div class="table-footer__pager">
+                <button type="button" class="btn-pager" id="usuariosPaginaPrev" disabled aria-label="Página anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                <span class="btn-pager btn-pager--current" id="usuariosPaginaLabel" aria-current="page">1</span>
+                <button type="button" class="btn-pager" id="usuariosPaginaNext" disabled aria-label="Página siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+  <!-- MODAL: Nuevo / editar vehículo (patrón rd-v2 / rd-card) -->
+  <div class="modal-panel" id="modalVehiculo">
+    <div class="modal-panel__content modal-panel__content--reserva-detalle modal-panel__content--vehiculo">
+      <div class="modal-panel__header">
+        <h3 id="vehiculoModalTitulo">Nuevo vehículo</h3>
+        <span class="modal-panel__close" data-modal="modalVehiculo">&times;</span>
+      </div>
+      <div class="modal-panel__body">
+        <form id="formVehiculo" class="rd-v2">
+          <input type="hidden" id="vehiculoEditId" value="">
+          <div class="rd-v2__cols">
+            <div class="rd-v2__col rd-v2__col--left">
+              <section class="rd-card rd-card--servicio">
+                <div class="rd-card__head"><i class="fas fa-id-card" aria-hidden="true"></i> Identificación</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="vehiculoPlaca">Placa</label>
+                    <input type="text" id="vehiculoPlaca" name="placa" class="form-group__input" required maxlength="10" autocomplete="off" placeholder="Ej. ABC-123" inputmode="text">
+                    <span class="form-group__error" id="vehiculoPlacaError"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="vehiculoTipo">Tipo de bus</label>
+                    <select id="vehiculoTipo" name="tipo" class="form-group__select" required>
+                      <option value="">—</option>
+                      <option value="Minivan">Minivan</option>
+                      <option value="Van">Van</option>
+                      <option value="Coaster">Coaster</option>
+                      <option value="Omnibus">Ómnibus</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="vehiculoCapacidad">Capacidad</label>
+                    <input type="number" id="vehiculoCapacidad" name="capacidad" class="form-group__input" required min="1" max="60" step="1">
+                  </div>
+                </div>
+              </section>
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-toggle-on" aria-hidden="true"></i> Estado en flota</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label" for="vehiculoEstado">Estado</label>
+                    <select id="vehiculoEstado" name="estado" class="form-group__select">
+                      <option value="disponible">Disponible</option>
+                      <option value="reservado">Reservado</option>
+                      <option value="mantenimiento">Mantenimiento</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="rd-v2__col rd-v2__col--right">
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-bus" aria-hidden="true"></i> Marca y modelo</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="vehiculoMarca">Marca</label>
+                    <input type="text" id="vehiculoMarca" name="marca" class="form-group__input" maxlength="30" placeholder="Ej. Mercedes" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label" for="vehiculoModelo">Modelo <span class="form-optional-tag">opcional</span></label>
+                    <input type="text" id="vehiculoModelo" name="modelo" class="form-group__input" maxlength="30" placeholder="Ej. Sprinter">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="vehiculoAnio">Año</label>
+                    <input type="number" id="vehiculoAnio" name="anio_fabricacion" class="form-group__input" required placeholder="Ej. 2023">
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <section class="rd-card rd-card--info-edit" role="note">
+            <div class="rd-re-info rd-re-info--single-line">
+              <span class="rd-re-info__icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
+              <p class="rd-re-info__text">Verifique los datos antes de guardar.</p>
+            </div>
+          </section>
+          <p class="form-group__error" id="vehiculoFormError"></p>
+        </form>
+      </div>
+      <div class="modal-panel__footer">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalVehiculo">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm" id="btnGuardarVehiculo">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: confirmar eliminar vehículo -->
+  <div class="modal-panel modal-panel--front" id="modalConfirmEliminarVehiculo">
+    <div class="modal-panel__content modal-panel__content--confirm">
+      <div class="modal-panel__header">
+        <h3 class="modal-confirm-delete__title">
+          <span class="modal-confirm-delete__title-icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span>
+          Eliminar vehículo
+        </h3>
+        <span class="modal-panel__close" data-modal="modalConfirmEliminarVehiculo">&times;</span>
+      </div>
+      <div class="modal-panel__body modal-confirm-delete__body">
+        <p class="modal-confirm-delete__text" id="eliminarVehiculoMensaje"></p>
+        <input type="hidden" id="eliminarVehiculoId" value="">
+      </div>
+      <div class="modal-panel__footer modal-panel__footer--confirm">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalConfirmEliminarVehiculo">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm modal-confirm-delete__btn-remove" id="btnConfirmEliminarVehiculo">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Empleado (patrón rd-v2 / rd-card) -->
+  <div class="modal-panel" id="modalEmpleado">
+    <div class="modal-panel__content modal-panel__content--reserva-detalle modal-panel__content--empleado">
+      <div class="modal-panel__header">
+        <h3 id="empleadoModalTitulo">Nuevo empleado</h3>
+        <span class="modal-panel__close" data-modal="modalEmpleado">&times;</span>
+      </div>
+      <div class="modal-panel__body">
+        <form id="formEmpleado" class="rd-v2">
+          <input type="hidden" id="empleadoEditId" value="">
+          <section class="rd-card rd-card--servicio rd-card--empleado-datos-full">
+            <div class="rd-card__head"><i class="fas fa-user" aria-hidden="true"></i> Datos personales</div>
+            <div class="rd-re-form">
+              <div class="rd-re-form--inline-2">
+                <div class="form-group">
+                  <label class="form-group__label form-group__label--required" for="empleadoNombre">Nombre</label>
+                  <input type="text" id="empleadoNombre" class="form-group__input" maxlength="50" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                  <label class="form-group__label form-group__label--required" for="empleadoApellido">Apellido</label>
+                  <input type="text" id="empleadoApellido" class="form-group__input" maxlength="50" required autocomplete="family-name">
+                </div>
+              </div>
+              <div class="rd-re-form--inline-2">
+                <div class="form-group">
+                  <label class="form-group__label form-group__label--required" for="empleadoDni">DNI</label>
+                  <input type="text" id="empleadoDni" class="form-group__input" maxlength="8" minlength="8" pattern="[0-9]{8}" inputmode="numeric" required autocomplete="off" title="8 dígitos">
+                  <span class="form-group__error" id="empleadoDniError"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-group__label form-group__label--required" for="empleadoTelefono">Teléfono</label>
+                  <input type="tel" id="empleadoTelefono" class="form-group__input" maxlength="9" minlength="9" pattern="[0-9]{9}" inputmode="numeric" required autocomplete="tel" title="9 dígitos (Perú)">
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="rd-v2__cols rd-v2__cols--empleado-bajo">
+            <div class="rd-v2__col">
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-briefcase" aria-hidden="true"></i> Cargo y licencia</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="empleadoCargo">Cargo</label>
+                    <select id="empleadoCargo" class="form-group__select" required>
+                      <option value="administrador">Administrador</option>
+                      <option value="asesor_ventas">Asesor de ventas</option>
+                      <option value="conductor">Conductor</option>
+                    </select>
+                  </div>
+                  <div class="form-group" id="empleadoGrupoLicencia" hidden>
+                    <label class="form-group__label form-group__label--required" for="empleadoLicencia">Licencia de conducir</label>
+                    <input type="text" id="empleadoLicencia" class="form-group__input" maxlength="7" placeholder="Ej. AB-0000" inputmode="text" autocomplete="off">
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="rd-v2__col">
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-toggle-on" aria-hidden="true"></i> Estado en flota</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="empleadoEstado">Estado</label>
+                    <select id="empleadoEstado" class="form-group__select">
+                      <option value="true">Activo</option>
+                      <option value="false">Inactivo</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <section class="rd-card rd-card--info-edit" role="note">
+            <div class="rd-re-info rd-re-info--single-line">
+              <span class="rd-re-info__icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
+              <p class="rd-re-info__text">El DNI debe ser único. Si el cargo es <strong>Conductor</strong>, indica la licencia antes de guardar.</p>
+            </div>
+          </section>
+          <p class="form-group__error" id="empleadoFormError"></p>
+        </form>
+      </div>
+      <div class="modal-panel__footer">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalEmpleado">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm" id="btnGuardarEmpleado">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: confirmar eliminar empleado -->
+  <div class="modal-panel modal-panel--front" id="modalConfirmEliminarEmpleado">
+    <div class="modal-panel__content modal-panel__content--confirm">
+      <div class="modal-panel__header">
+        <h3 class="modal-confirm-delete__title">
+          <span class="modal-confirm-delete__title-icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span>
+          Eliminar empleado
+        </h3>
+        <span class="modal-panel__close" data-modal="modalConfirmEliminarEmpleado">&times;</span>
+      </div>
+      <div class="modal-panel__body modal-confirm-delete__body">
+        <p class="modal-confirm-delete__text" id="eliminarEmpleadoMensaje"></p>
+        <input type="hidden" id="eliminarEmpleadoId" value="">
+      </div>
+      <div class="modal-panel__footer modal-panel__footer--confirm">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalConfirmEliminarEmpleado">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm modal-confirm-delete__btn-remove" id="btnConfirmEliminarEmpleado">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Nuevo / editar usuario (patrón rd-v2 / rd-card) -->
+  <div class="modal-panel" id="modalUsuario">
+    <div class="modal-panel__content modal-panel__content--reserva-detalle modal-panel__content--usuario-sistema">
+      <div class="modal-panel__header">
+        <h3 id="usuarioModalTitulo">Nuevo usuario del sistema</h3>
+        <span class="modal-panel__close" data-modal="modalUsuario">&times;</span>
+      </div>
+      <div class="modal-panel__body">
+        <form id="formUsuario" class="rd-v2">
+          <input type="hidden" id="usuarioEditId" value="">
+          <section class="rd-card rd-card--usuario-cuenta-full">
+            <div class="rd-card__head"><i class="fas fa-key" aria-hidden="true"></i> Cuenta de acceso</div>
+            <div class="rd-re-form">
+              <div class="form-group">
+                <label class="form-group__label form-group__label--required" for="usuarioNombre">Nombre de usuario</label>
+                <input type="text" id="usuarioNombre" name="nombre_usuario" class="form-group__input" maxlength="50" autocomplete="username" required>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label form-group__label--required" for="usuarioCorreo">Correo</label>
+                <input type="email" id="usuarioCorreo" name="correo" class="form-group__input" maxlength="100" autocomplete="email" placeholder="correo@busesya.pe" required>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label form-group__label--required" id="usuarioLabelPassword" for="usuarioPassword">Contraseña inicial</label>
+                <input type="password" id="usuarioPassword" name="password" class="form-group__input" minlength="6" maxlength="72" autocomplete="new-password">
+              </div>
+            </div>
+          </section>
+          <div class="rd-v2__cols rd-v2__cols--usuario-bajo">
+            <div class="rd-v2__col">
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-shield-halved" aria-hidden="true"></i> Rol y estado</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="usuarioIdRol">Rol del sistema</label>
+                    <select id="usuarioIdRol" name="id_rol" class="form-group__select" required>
+                      <option value="">Cargando roles…</option>
+                    </select>
+                  </div>
+                  <div class="form-group" id="usuarioGrupoEstado">
+                    <label class="form-group__label form-group__label--required" for="usuarioEstado">Estado de acceso</label>
+                    <select id="usuarioEstado" name="estado" class="form-group__select" required>
+                      <option value="true">Activo (puede ingresar al sistema)</option>
+                      <option value="false">Inactivo (no puede iniciar sesión)</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="rd-v2__col">
+              <section class="rd-card rd-card--servicio" id="usuarioBloqueEmpCreacion">
+                <div class="rd-card__head"><i class="fas fa-user-plus" aria-hidden="true"></i> Empleado vinculado</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="usuarioEmpleado">Empleado</label>
+                    <select id="usuarioEmpleado" name="id_empleado" class="form-group__select" required>
+                      <option value="">Selecciona…</option>
+                    </select>
+                    <span class="panel-modal__hint">Solo aparecen empleados que aún no tienen cuenta en el sistema.</span>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <section class="rd-card rd-card--info-edit" role="note">
+            <div class="rd-re-info rd-re-info--single-line">
+              <span class="rd-re-info__icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
+              <p class="rd-re-info__text">No puedes desactivar tu propia cuenta mientras estés conectado.</p>
+            </div>
+          </section>
+          <p class="form-group__error" id="usuarioFormError"></p>
+        </form>
+      </div>
+      <div class="modal-panel__footer">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalUsuario">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm" id="btnGuardarUsuario">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal confirmar eliminar usuario -->
+  <div class="modal-panel modal-panel--front" id="modalConfirmEliminarUsuario">
+    <div class="modal-panel__content modal-panel__content--confirm">
+      <div class="modal-panel__header">
+        <h3 class="modal-confirm-delete__title">
+          <span class="modal-confirm-delete__title-icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span>
+          Eliminar usuario
+        </h3>
+        <span class="modal-panel__close" data-modal="modalConfirmEliminarUsuario">&times;</span>
+      </div>
+      <div class="modal-panel__body modal-confirm-delete__body">
+        <p class="modal-confirm-delete__text" id="eliminarUsuarioMensaje"></p>
+        <input type="hidden" id="eliminarUsuarioId" value="">
+      </div>
+      <div class="modal-panel__footer modal-panel__footer--confirm">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalConfirmEliminarUsuario">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm modal-confirm-delete__btn-remove" id="btnConfirmEliminarUsuario">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: nueva reserva -->
+  <div class="modal-panel" id="modalNuevaReservaAdmin">
+    <div class="modal-panel__content modal-panel__content--reserva-detalle modal-panel__content--reserva-nueva">
+      <div class="modal-panel__header">
+        <h3>Nueva reserva manual</h3>
+        <span class="modal-panel__close" data-modal="modalNuevaReservaAdmin">&times;</span>
+      </div>
+      <div class="modal-panel__body">
+        <form id="formNuevaReservaAdmin" class="rd-v2">
+          <div class="rd-v2__cols">
+            <div class="rd-v2__col rd-v2__col--left">
+              <section class="rd-card rd-card--servicio">
+                <div class="rd-card__head"><i class="fas fa-route" aria-hidden="true"></i> Ruta y horarios</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResPartida">Dirección de partida</label>
+                    <input type="text" id="nuevaResPartida" name="direccion_partida" class="form-group__input" maxlength="255" required placeholder="Ej. Av. Javier Prado 123">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResLlegada">Dirección de llegada</label>
+                    <input type="text" id="nuevaResLlegada" name="direccion_llegada" class="form-group__input" maxlength="255" required placeholder="Ej. Plaza de Armas">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResFechaPartida">Fecha y hora de partida</label>
+                    <input type="datetime-local" id="nuevaResFechaPartida" name="fecha_partida" class="form-group__input" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label" for="nuevaResFechaRetorno">Fecha y hora de retorno <span class="form-optional-tag">opcional</span></label>
+                    <input type="datetime-local" id="nuevaResFechaRetorno" name="fecha_retorno" class="form-group__input">
+                  </div>
+                </div>
+              </section>
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-users" aria-hidden="true"></i> Pasajeros y precio</div>
+                <div class="rd-re-form rd-re-form--inline-2">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResPasajeros">Pasajeros</label>
+                    <input type="number" id="nuevaResPasajeros" name="numero_personas" class="form-group__input" min="1" max="50" required value="1">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label" for="nuevaResPrecio">Precio total (S/) <span class="form-optional-tag">opcional</span></label>
+                    <input type="number" id="nuevaResPrecio" name="precio_total" class="form-group__input" min="0" step="0.01" placeholder="0">
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="rd-v2__col rd-v2__col--right">
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-user" aria-hidden="true"></i> Cliente</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResNombre">Nombre del cliente</label>
+                    <input type="text" id="nuevaResNombre" name="nombre_cliente" class="form-group__input" maxlength="100" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResDni">DNI</label>
+                    <input type="text" id="nuevaResDni" name="dni" class="form-group__input" maxlength="8" minlength="8" pattern="[0-9]{8}" inputmode="numeric" required title="8 dígitos numéricos">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResTelefono">Teléfono</label>
+                    <input type="tel" id="nuevaResTelefono" name="telefono" class="form-group__input" maxlength="9" minlength="9" pattern="[0-9]{9}" inputmode="numeric" required title="9 dígitos (Perú)">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label" for="nuevaResEmail">Correo <span class="form-optional-tag">opcional</span></label>
+                    <input type="email" id="nuevaResEmail" name="email" class="form-group__input" placeholder="correo@ejemplo.com">
+                  </div>
+                </div>
+              </section>
+              <section class="rd-card rd-card--pago">
+                <div class="rd-card__head"><i class="fas fa-credit-card" aria-hidden="true"></i> Pago</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResMetodoPago">Método de pago</label>
+                    <select id="nuevaResMetodoPago" name="metodo_pago" class="form-group__select" required>
+                      <option value="" disabled selected>Elige una opción</option>
+                      <option value="yape">Yape</option>
+                      <option value="plin">Plin</option>
+                      <option value="bcp">Transferencia BCP</option>
+                      <option value="interbank">Transferencia Interbank</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="nuevaResComprobante">Comprobante de pago</label>
+                    <input type="file" id="nuevaResComprobante" name="comprobante" class="form-group__input" accept=".jpg,.jpeg,.png,.pdf" required>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <section class="rd-card rd-card--info-edit" role="note">
+            <div class="rd-re-info rd-re-info--single-line">
+              <span class="rd-re-info__icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
+              <p class="rd-re-info__text">Los campos obligatorios deben estar bien llenados.</p>
+            </div>
+          </section>
+          <p class="form-group__error" id="nuevaReservaFormError"></p>
+        </form>
+      </div>
+      <div class="modal-panel__footer">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalNuevaReservaAdmin">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm" id="btnGuardarNuevaReservaAdmin">Registrar reserva</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-panel" id="modalReservaEditar">
+    <div class="modal-panel__content modal-panel__content--reserva-detalle modal-panel__content--reserva-edit">
+      <div class="modal-panel__header">
+        <h3>Editar reserva</h3>
+        <span class="modal-panel__close" data-modal="modalReservaEditar">&times;</span>
+      </div>
+      <div class="modal-panel__body">
+        <form id="formReservaEditar" class="rd-v2">
+          <input type="hidden" id="reservaEditId" value="">
+          <input type="hidden" id="reservaHadRetornoInicial" value="">
+          <input type="hidden" id="reservaEditPrecioInicial" value="">
+          <input type="hidden" id="reservaEditEstadoInicial" value="">
+          <input type="hidden" id="reservaEditTeniaComprobante" value="">
+          <div class="rd-v2__summary">
+            <div class="rd-v2__summary-icon" aria-hidden="true"><i class="fas fa-pen-to-square"></i></div>
+            <div class="rd-v2__summary-text">
+              <div class="rd-v2__summary-title" id="reservaModalTituloCliente">—</div>
+              <div class="rd-v2__summary-meta">Cliente asociado a la reserva</div>
+            </div>
+          </div>
+          <div class="rd-v2__cols">
+            <div class="rd-v2__col rd-v2__col--left">
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-sliders" aria-hidden="true"></i> Estado y pasajeros</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="reservaEditPasajeros">Cantidad de pasajeros</label>
+                    <input type="number" id="reservaEditPasajeros" min="1" max="50" step="1" required class="form-group__input">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="reservaEditEstado">Estado</label>
+                    <select id="reservaEditEstado" class="form-group__select" required>
+                      <option value="pendiente">Pendiente</option>
+                      <option value="confirmada">Confirmada (pagada)</option>
+                      <option value="cancelada">Cancelada</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+              <div class="rd-edit-monto-comp-row">
+              <section class="rd-card rd-card--pago">
+                <div class="rd-card__head"><i class="fas fa-coins" aria-hidden="true"></i> Monto (S/)</div>
+                <div class="rd-re-form">
+                  <div class="form-group modal-reserva-edit__field-monto">
+                    <div class="modal-reserva-edit__monto-input-wrap">
+                      <span class="modal-reserva-edit__monto-prefix" aria-hidden="true">S/</span>
+                      <input type="number" id="reservaEditPrecioTotal" min="0" step="0.01" class="form-group__input" placeholder="0.00" aria-label="Monto de la reserva en soles">
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="rd-card rd-card--comprobante-edit">
+                <div class="rd-card__head"><i class="fas fa-file-invoice" aria-hidden="true"></i> Subir comprobante de pago</div>
+                <div class="rd-re-form">
+                  <div class="form-group form-group--file-only">
+                    <input type="file" id="reservaEditComprobante" class="form-group__input form-group__input--file-compact" accept=".jpg,.jpeg,.png,.pdf" aria-label="Seleccionar archivo de comprobante">
+                  </div>
+                </div>
+              </section>
+              </div>
+            </div>
+            <div class="rd-v2__col rd-v2__col--right">
+              <section class="rd-card rd-card--servicio">
+                <div class="rd-card__head"><i class="fas fa-route" aria-hidden="true"></i> Ruta</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="reservaEditOrigen">Origen</label>
+                    <input type="text" id="reservaEditOrigen" maxlength="50" required class="form-group__input">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="reservaEditDestino">Destino</label>
+                    <input type="text" id="reservaEditDestino" maxlength="50" required class="form-group__input">
+                  </div>
+                </div>
+              </section>
+              <section class="rd-card">
+                <div class="rd-card__head"><i class="fas fa-calendar-days" aria-hidden="true"></i> Fechas</div>
+                <div class="rd-re-form">
+                  <div class="form-group">
+                    <label class="form-group__label form-group__label--required" for="reservaEditFechaPartida">Fecha de partida</label>
+                    <input type="datetime-local" id="reservaEditFechaPartida" required class="form-group__input">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-group__label" for="reservaEditFechaRetorno">Fecha de retorno <span class="form-optional-tag">opcional</span></label>
+                    <input type="datetime-local" id="reservaEditFechaRetorno" class="form-group__input">
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <section class="rd-card rd-card--info-edit" role="note">
+            <div class="rd-re-info rd-re-info--single-line rd-re-info--edit-reserva-hint">
+              <span class="rd-re-info__icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
+              <p class="rd-re-info__text">Verifique los datos antes de guardar. Subir comprobante de pago para aplicar la reserva.</p>
+            </div>
+          </section>
+          <p class="form-group__error" id="reservaFormError"></p>
+        </form>
+      </div>
+      <div class="modal-panel__footer">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalReservaEditar">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm" id="btnGuardarReservaEditar"><i class="fas fa-floppy-disk" aria-hidden="true"></i> Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-panel modal-panel--front" id="modalConfirmEliminarReserva">
+    <div class="modal-panel__content modal-panel__content--confirm">
+      <div class="modal-panel__header">
+        <h3 class="modal-confirm-delete__title">
+          <span class="modal-confirm-delete__title-icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></span>
+          Eliminar reserva
+        </h3>
+        <span class="modal-panel__close" data-modal="modalConfirmEliminarReserva">&times;</span>
+      </div>
+      <div class="modal-panel__body modal-confirm-delete__body">
+        <p class="modal-confirm-delete__text" id="eliminarReservaMensaje"></p>
+        <input type="hidden" id="eliminarReservaId" value="">
+      </div>
+      <div class="modal-panel__footer modal-panel__footer--confirm">
+        <button type="button" class="btn btn--light btn--sm" data-modal="modalConfirmEliminarReserva">Cancelar</button>
+        <button type="button" class="btn btn--primary btn--sm modal-confirm-delete__btn-remove" id="btnConfirmEliminarReserva">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-panel modal-panel--front" id="modalReservaCreadaExito">
+    <div class="modal-panel__content modal-panel__content--confirm modal-panel__content--success-msg">
+      <div class="modal-panel__header">
+        <h3 class="modal-confirm-delete__title modal-success-msg__title">
+          <span class="modal-success-msg__title-icon" aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+          Reserva creada
+        </h3>
+        <span class="modal-panel__close" data-modal="modalReservaCreadaExito">&times;</span>
+      </div>
+      <div class="modal-panel__body modal-confirm-delete__body">
+        <p class="modal-confirm-delete__text" id="reservaCreadaExitoMensaje"></p>
+        <p class="modal-success-msg__codigo" id="reservaCreadaExitoCodigo" hidden></p>
+      </div>
+      <div class="modal-panel__footer modal-panel__footer--confirm">
+        <button type="button" class="btn btn--primary btn--sm" data-modal="modalReservaCreadaExito">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS del Panel -->
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/reserva-panel-shared.js"></script>
+  <script src="js/panel-admin.js"></script>
+
+</body>
+</html>
