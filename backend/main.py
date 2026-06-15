@@ -54,6 +54,11 @@ app.add_middleware(
 )
 
 app.include_router(router_api)
+
+# Crear antes del mount: en Render/local la carpeta puede no existir aún
+# (lifespan corre después de importar este módulo).
+CARPETA_UPLOADS.mkdir(parents=True, exist_ok=True)
+CARPETA_COMPROBANTES.mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=str(CARPETA_UPLOADS)), name="uploads")
 
 
